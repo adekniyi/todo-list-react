@@ -1,11 +1,29 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 
-function TodoFilter() {
+function TodoFilter(props) {
+    const [getValue, setGetValue] = useState("")
+
+    const getKey = (e) => {
+        console.log(e.target.value)
+        props.todos.map(todo => {
+            if (todo.indexOf(e.target.value) > -1) {
+                return console.log('i can get the todos')
+            } else {
+                return console.log('i cant get the todos')
+            }
+        })
+    }
+
     return ( <
         div style = { topBox } >
         <
         input type = "text"
         placeholder = "Enter Value"
+        onKeyUp = { getKey }
+        value = { getValue }
+        onChange = {
+            (e) => setGetValue(e.target.value)
+        }
         style = { todoStyle }
         / >  <
         div className = "check"
@@ -19,7 +37,9 @@ function TodoFilter() {
         }
         /> <
         h4 > Show completed Todos < /h4>   < /
-        div > <
+        div >
+
+        <
         /
         div >
     )

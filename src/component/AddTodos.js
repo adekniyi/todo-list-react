@@ -1,12 +1,15 @@
 import React, { useState } from 'react'
-import TodoList from './TodoList'
 
-function AddTodos() {
+
+
+
+function AddTodos(props) {
     const [text, setText] = useState("")
 
     const submitForm = (e) => {
         e.preventDefault()
-        console.log(`from submit: ${text}`)
+        props.addtodos(text)
+        setText("")
     }
 
     return ( <
@@ -27,8 +30,7 @@ function AddTodos() {
         style = { btn } > Add Todo < /button> < /
         form >
         <
-        TodoList todo = { text }
-        /> < /
+        /
         div >
     )
 }

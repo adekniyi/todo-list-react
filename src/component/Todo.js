@@ -1,19 +1,18 @@
 import React from 'react'
-import TodoFilter from './TodoFilter'
+
 import TodoList from './TodoList'
-import AddTodos from './AddTodos'
 
 function Todo() {
+
     return ( <
         div >
+
         <
-        TodoFilter / >
+        TodoList todo /
+        >
         <
-        TodoList / >
-        <
-        AddTodos / >
-        <
-        /div>
+        /
+        div >
     )
 }
 
