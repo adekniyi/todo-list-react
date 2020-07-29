@@ -17,27 +17,40 @@ function TodoList(props) {
         settodo([...todos, title]);
     }
 
-    const disStyle = (todo) => {
-        if (isChecked) {
-            return {
-                textDecoration: "line-through"
-            }
-        } else if (!isChecked) {
-            return {
-                textDecoration: "none"
-            }
+    const disStyle = () => {
+        // if (isChecked) {
+        return {
+            //textDecoration: isChecked ? "line-through" : "none",
+            // display: "flex",
+            // justifyContent: "space-between",
+            // alignItems: "center",
+            // marginBottom: "10px"
         }
+        // } 
+        // else if (!isChecked) {
+        //     return {
+        //         textDecoration: "none",
+        //         display: "flex",
+        //         justifyContent: "space-between",
+        //         alignItems: "center",
+        //         marginBottom: "10px"
+        //     }
+        // }
+    }
+
+
+    const disCom = () => {
+        settodo([...todos.filter((todoDis) => isChecked === true ? todoDis : "")]);
     }
 
 
     const markCompleted = (todo) => {
-        if (!isChecked) {
-            console.log("completed ", todo)
-            setIsChecked((!isChecked))
-        } else if (isChecked) {
-            console.log("not completed ", todo)
-            setIsChecked((!isChecked))
-        }
+        settodo([...todos.map((todoI) => {
+            if (todoI === todo) {
+                setIsChecked((!isChecked))
+            }
+            return todoI
+        })]);
     }
 
     const delTodo = (todo) => {
@@ -47,9 +60,9 @@ function TodoList(props) {
     }
 
 
-    const filter = todos.filter(todo => {
-        return todo.toLowerCase().includes(getValue.toLowerCase())
-    })
+    // const filter = todos.filter(todo => {
+    //     return todo.toLowerCase().includes(getValue.toLowerCase())
+    // })
 
     return ( <
         div >
@@ -71,6 +84,9 @@ function TodoList(props) {
         } >
         <
         input type = "checkbox"
+        onChange = {
+            () => disCom()
+        }
         style = {
             { marginRight: "10px" }
         }
@@ -86,13 +102,15 @@ function TodoList(props) {
 
         <
         div style = { topBox } > {
-            filter.map(
+            todos.map(
                 (todo) => ( < h3 key = { todo }
                     style = {
                         h
                     } >
                     <
-                    div >
+                    div style = {
+                        disStyle()
+                    } >
                     <
                     input type = "checkbox"
                     onChange = {
@@ -123,7 +141,7 @@ const h = {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    marginBottom: "10px"
+    marginBottom: "10px",
 }
 
 const topBox = {

@@ -26,6 +26,10 @@ body {
     border-radius: 5px;
 }
 
+h1 {
+    text-align: center;
+}
+
 .button:hover {
     background-color: white;
 }
