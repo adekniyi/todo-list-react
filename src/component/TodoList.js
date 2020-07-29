@@ -38,9 +38,14 @@ function TodoList(props) {
             console.log("not completed ", todo)
             setIsChecked((!isChecked))
         }
+    }
 
+    const delTodo = (todo) => {
+        console.log(`clicked ${todo}`)
+        settodo([...todos.filter((todoL) => todoL !== todo)]);
 
     }
+
 
     const filter = todos.filter(todo => {
         return todo.toLowerCase().includes(getValue.toLowerCase())
@@ -83,13 +88,22 @@ function TodoList(props) {
         div style = { topBox } > {
             filter.map(
                 (todo) => ( < h3 key = { todo }
-                    style = { disStyle(todo) } >
+                    style = {
+                        h
+                    } >
+                    <
+                    div >
                     <
                     input type = "checkbox"
                     onChange = {
                         () => markCompleted(todo)
                     }
-                    /> { todo } < /
+                    /> { todo }  < /
+                    div > <
+                    button style = { btnStyle }
+                    onClick = {
+                        () => delTodo(todo)
+                    } > X < /button> < /
                     h3 > )
             )
         }
@@ -104,12 +118,21 @@ function TodoList(props) {
     )
 }
 
+
+const h = {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: "10px"
+}
+
 const topBox = {
     borderRadius: "5px",
     overflow: "hidden",
     backgroundColor: "lightgray",
     margin: "0 auto",
-    padding: "10px 10px 10px 10px"
+    padding: "10px 10px 10px 10px",
+
 }
 
 const todoStyle = {
@@ -129,6 +152,15 @@ const topBox1 = {
     borderRadius: "5px",
     overflow: "hidden",
     backgroundColor: "lightgray"
+}
+
+const btnStyle = {
+    backgroundColor: "red",
+    color: "white",
+    padding: "5px 9px",
+    border: "none",
+    borderRadius: "50%",
+    cursor: "pointer"
 }
 
 export default TodoList
