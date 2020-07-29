@@ -3,23 +3,25 @@ import React, { useState, useEffect } from 'react'
 function TodoFilter(props) {
     const [getValue, setGetValue] = useState("")
 
-    const getKey = (e) => {
-        console.log(e.target.value)
-        props.todos.map(todo => {
-            if (todo.indexOf(e.target.value) > -1) {
-                return console.log('i can get the todos')
-            } else {
-                return console.log('i cant get the todos')
-            }
-        })
-    }
+    // const getKey = (e) => {
+    //     console.log(e.target.value)
+    //     props.todos.map(todo => {
+    //         if (todo.indexOf(e.target.value) > -1) {
+    //             return console.log('i can get the todos')
+    //         } else {
+    //             return console.log('i cant get the todos')
+    //         }
+    //     })
+    // }
+
+
 
     return ( <
         div style = { topBox } >
         <
         input type = "text"
         placeholder = "Enter Value"
-        onKeyUp = { getKey }
+        onKeyUp = { props.filter(getValue) }
         value = { getValue }
         onChange = {
             (e) => setGetValue(e.target.value)
