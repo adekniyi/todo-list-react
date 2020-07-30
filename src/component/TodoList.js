@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import AddTodos from './AddTodos'
-//import TodoFilter from './TodoFilter'
-
+import "../App.css"
 
 
 function TodoList(props) {
@@ -10,37 +9,7 @@ function TodoList(props) {
     const [isChecked, setIsChecked] = useState(false);
 
     const addtodos = (title) => {
-        // const items = {
-        //     id: todos.length,
-        //     title: title
-        // }
         settodo([...todos, title]);
-    }
-
-    const disStyle = () => {
-        // if (isChecked) {
-        return {
-            //textDecoration: isChecked ? "line-through" : "none",
-            // display: "flex",
-            // justifyContent: "space-between",
-            // alignItems: "center",
-            // marginBottom: "10px"
-        }
-        // } 
-        // else if (!isChecked) {
-        //     return {
-        //         textDecoration: "none",
-        //         display: "flex",
-        //         justifyContent: "space-between",
-        //         alignItems: "center",
-        //         marginBottom: "10px"
-        //     }
-        // }
-    }
-
-
-    const disCom = () => {
-        settodo([...todos.filter((todoDis) => isChecked === true ? todoDis : "")]);
     }
 
 
@@ -54,15 +23,14 @@ function TodoList(props) {
     }
 
     const delTodo = (todo) => {
-        console.log(`clicked ${todo}`)
         settodo([...todos.filter((todoL) => todoL !== todo)]);
 
     }
 
 
-    // const filter = todos.filter(todo => {
-    //     return todo.toLowerCase().includes(getValue.toLowerCase())
-    // })
+    const filter = todos.filter(todo => {
+        return todo.toLowerCase().includes(getValue.toLowerCase())
+    })
 
     return ( <
         div >
@@ -77,22 +45,7 @@ function TodoList(props) {
             (e) => setGetValue(e.target.value)
         }
         style = { todoStyle }
-        / >  <
-        div className = "check"
-        style = {
-            { display: "flex", alignItems: "center", margin: "0 auto", width: '95%', marginBottom: '10px' }
-        } >
-        <
-        input type = "checkbox"
-        onChange = {
-            () => disCom()
-        }
-        style = {
-            { marginRight: "10px" }
-        }
-        /> <
-        h4 > Show completed Todos < /h4>   < /
-        div >
+        / > 
 
         <
         /
@@ -102,15 +55,13 @@ function TodoList(props) {
 
         <
         div style = { topBox } > {
-            todos.map(
+            filter.map(
                 (todo) => ( < h3 key = { todo }
                     style = {
                         h
                     } >
                     <
-                    div style = {
-                        disStyle()
-                    } >
+                    div >
                     <
                     input type = "checkbox"
                     onChange = {

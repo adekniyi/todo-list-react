@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-
+import "../App.css"
 
 
 
@@ -26,7 +26,7 @@ function AddTodos(props) {
             (e) => setText(e.target.value)
         }
         / > <
-        button className = "button"
+        button className = "btn"
         style = { btn } > Add Todo < /button> < /
         form >
         <
