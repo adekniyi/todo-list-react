@@ -3,12 +3,12 @@ import "../App.css"
 
 
 
-function AddTodos(props) {
-    const [text, setText] = useState("")
+function AddTodos({ text, setText, addtodos }) {
+    //const [text, setText] = useState("")
 
     const submitForm = (e) => {
         e.preventDefault()
-        props.addtodos(text)
+        addtodos(text)
         setText("")
     }
 

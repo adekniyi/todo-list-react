@@ -7,6 +7,9 @@ function TodoList(props) {
     const [todos, settodo] = useState([])
     const [getValue, setGetValue] = useState("")
     const [isChecked, setIsChecked] = useState(false);
+    const [text, setText] = useState("")
+
+
 
     const addtodos = (title) => {
         settodo([...todos, title]);
@@ -26,6 +29,18 @@ function TodoList(props) {
         settodo([...todos.filter((todoL) => todoL !== todo)]);
 
     }
+
+
+
+    const editTodo = (todo) => {
+        settodo([...todos.map((todoEd) => {
+            if (todoEd === todo) {
+                setText(todo)
+            }
+            return todoEd
+        })]);
+    }
+
 
 
     const filter = todos.filter(todo => {
@@ -68,11 +83,31 @@ function TodoList(props) {
                         () => markCompleted(todo)
                     }
                     /> { todo }  < /
-                    div > <
+                    div >
+                    <
+                    div >
+
+
+                    {
+                        /* <
+                                            button style = { btnStyle1 }
+                                            onClick = {
+                                                () => editTodo(todo)
+                                            } > <
+                                            i className = "fa fa-pencil fa-2x" > < /i> < /button > */
+                    }
+
+
+
+
+                    <
                     button style = { btnStyle }
                     onClick = {
                         () => delTodo(todo)
-                    } > X < /button> < /
+                    } > <
+                    i className = "fa fa-trash-o fa-2x" > < /i> < /button >
+                    <
+                    /div> < /
                     h3 > )
             )
         }
@@ -82,6 +117,8 @@ function TodoList(props) {
 
         <
         AddTodos addtodos = { addtodos }
+        text = { text }
+        setText = { setText }
         /> < /
         div >
     )
@@ -124,11 +161,20 @@ const topBox1 = {
 }
 
 const btnStyle = {
-    backgroundColor: "red",
-    color: "white",
+    backgroundColor: "transparent",
+    color: "red",
     padding: "5px 9px",
     border: "none",
-    borderRadius: "50%",
+    // borderRadius: "50%",
+    cursor: "pointer"
+}
+
+const btnStyle1 = {
+    backgroundColor: "transparent",
+    color: "green",
+    padding: "5px 9px",
+    border: "none",
+    // borderRadius: "50%",
     cursor: "pointer"
 }
 
