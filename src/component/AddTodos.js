@@ -8,8 +8,7 @@ function AddTodos({ text, setText, addtodos }) {
 
     const submitForm = (e) => {
         e.preventDefault()
-        addtodos(text)
-        setText("")
+        addtodos()
     }
 
     return ( <

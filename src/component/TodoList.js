@@ -1,51 +1,66 @@
 import React, { useState } from 'react'
 import AddTodos from './AddTodos'
 import "../App.css"
-
+import uuid from "uuid/dist/v4"
 
 function TodoList(props) {
     const [todos, settodo] = useState([])
     const [getValue, setGetValue] = useState("")
     const [isChecked, setIsChecked] = useState(false);
     const [text, setText] = useState("")
+    const [edit, setEdit] = useState(false)
+    const [id, setId] = useState("")
 
 
 
-    const addtodos = (title) => {
-        settodo([...todos, title]);
+    const addtodos = () => {
+        if (text !== "") {
+            if (edit) {
+                let tempTodos = todos.map(item => {
+                    return item.id === id ? {...item, text } : item
+                        //console.log(item)
+                });
+                settodo(tempTodos)
+                setEdit(false)
+            } else {
+                const singleTodo = { id: uuid(), text: text }
+                settodo([...todos, singleTodo]);
+            }
+        } else {
+            console.log("error")
+        }
+        setText("")
     }
 
 
-    const markCompleted = (todo) => {
+    const markCompleted = (id) => {
         settodo([...todos.map((todoI) => {
-            if (todoI === todo) {
+            if (todoI.id === id) {
                 setIsChecked((!isChecked))
             }
             return todoI
         })]);
     }
 
-    const delTodo = (todo) => {
-        settodo([...todos.filter((todoL) => todoL !== todo)]);
+    const delTodo = (id) => {
+        settodo([...todos.filter((todoL) => todoL.id !== id)]);
 
     }
 
-
-
-    const editTodo = (todo) => {
-        settodo([...todos.map((todoEd) => {
-            if (todoEd === todo) {
-                setText(todo)
-            }
-            return todoEd
-        })]);
-    }
 
 
 
     const filter = todos.filter(todo => {
-        return todo.toLowerCase().includes(getValue.toLowerCase())
+        return todo.text.toLowerCase().includes(getValue.toLowerCase())
     })
+
+
+    const editTodo = (id) => {
+        let eTodo = todos.find(item => item.id === id)
+        setText(eTodo.text)
+        setEdit(true)
+        setId(id)
+    }
 
     return ( <
         div >
@@ -71,7 +86,7 @@ function TodoList(props) {
         <
         div style = { topBox } > {
             filter.map(
-                (todo) => ( < h3 key = { todo }
+                (todo) => ( < h3 key = { todo.id }
                     style = {
                         h
                     } >
@@ -80,22 +95,20 @@ function TodoList(props) {
                     <
                     input type = "checkbox"
                     onChange = {
-                        () => markCompleted(todo)
+                        () => markCompleted(todo.id)
                     }
-                    /> { todo }  < /
+                    /> { todo.text }  < /
                     div >
                     <
                     div >
 
 
-                    {
-                        /* <
-                                            button style = { btnStyle1 }
-                                            onClick = {
-                                                () => editTodo(todo)
-                                            } > <
-                                            i className = "fa fa-pencil fa-2x" > < /i> < /button > */
-                    }
+                    <
+                    button style = { btnStyle1 }
+                    onClick = {
+                        () => editTodo(todo.id)
+                    } > <
+                    i className = "fa fa-pencil fa-2x" > < /i>< /button >
 
 
 
@@ -103,9 +116,9 @@ function TodoList(props) {
                     <
                     button style = { btnStyle }
                     onClick = {
-                        () => delTodo(todo)
+                        () => delTodo(todo.id)
                     } > <
-                    i className = "fa fa-trash-o fa-2x" > < /i> < /button >
+                    i className = "fa fa-trash-o fa-2x" > < /i>< /button >
                     <
                     /div> < /
                     h3 > )
